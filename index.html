@@ -411,7 +411,27 @@
 
 <p class="footer">dibuat dengan <span>♥</span> khusus untukmu Herul Muhammad</p>
 
-<script>
+<script type="module">
+ import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+
+import {
+  getFirestore,
+  doc,
+  getDoc,
+  setDoc
+} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAUG8h02yaiOM0qz_p-v6TOPwsl7vq4fOU",
+  authDomain: "botol-cinta.firebaseapp.com",
+  projectId: "botol-cinta",
+  storageBucket: "botol-cinta.firebasestorage.app",
+  messagingSenderId: "696888311492",
+  appId: "1:696888311492:web:179013558ebb8a58165391"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 const MESSAGES = [
   "Herull botakk, Kamu mungkin tidak selalu tahu betapa berharganya kehadiranmu — tapi aku tahu, dan aku ingin kamu percaya itu.",
   "Ada momen-momen kecil bersamamu yang diam-diam aku simpan, karena rasanya terlalu berharga untuk dilupakan.",
@@ -445,21 +465,38 @@ const MESSAGES = [
   "Tiga puluh hari, tiga puluh pesan — dan masih belum cukup untuk mengatakan betapa berartinya kamu. Aku cinta kamu."
 ];
 
-const KEY = 'botol_cinta_v2';
+async function load() {
 
-function load() {
-  try { const r = localStorage.getItem(KEY); if (r) return JSON.parse(r); } catch(e) {}
-  return { opened: {}, lastDate: null };
+  const ref = doc(db, "botol_cinta", "ayang");
+
+  const snap = await getDoc(ref);
+
+  if (snap.exists()) {
+    return snap.data();
+  }
+
+  return {
+    opened: {},
+    lastDate: null
+  };
 }
-function save(s) {
-  try { localStorage.setItem(KEY, JSON.stringify(s)); } catch(e) {}
+
+async function save(s) {
+
+  const ref = doc(db, "botol_cinta", "ayang");
+
+  await setDoc(ref, s);
 }
+ 
 function today() {
   const d = new Date();
   return `${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()}`;
 }
 
-let state = load();
+let state = {
+  opened: {},
+  lastDate: null
+};
 
 function nextIdx() {
   for (let i = 0; i < 30; i++) if (!state.opened[i]) return i;
@@ -468,7 +505,7 @@ function nextIdx() {
 
 function canOpen() { return state.lastDate !== today(); }
 
-function openCell(i) {
+async function openCell(i) {
   if (i !== nextIdx()) return;
   if (!canOpen()) {
     const n = document.getElementById('notice');
@@ -478,7 +515,7 @@ function openCell(i) {
   }
   state.opened[i] = true;
   state.lastDate = today();
-  save(state);
+  await save(state);
   render();
   spawnConfetti();
   setTimeout(() => showModal(i), 300);
@@ -589,13 +626,19 @@ function render() {
   }
 }
 
-render();
+(async () => {
 
-updateCountdown();
+  state = await load();
 
-setInterval(() => {
+  render();
+
   updateCountdown();
-}, 1000);
+
+  setInterval(() => {
+    updateCountdown();
+  }, 1000);
+
+})();
 </script>
 </body>
 </html>
