@@ -525,10 +525,13 @@ function render() {
     icon.className = 'cell-icon';
 
     if (state.opened[i]) {
-      cell.classList.add('opened');
-      icon.style.cssText = 'color:#C9526E; font-size:14px;';
-      icon.textContent = '♥';
-    } else if (i === next) {
+  cell.classList.add('opened');
+  icon.style.cssText = 'color:#C9526E; font-size:14px;';
+  icon.textContent = '♥';
+
+  cell.style.cursor = 'pointer';
+  cell.onclick = () => showModal(i);
+  }else if (i === next) {
       cell.classList.add('available');
       icon.style.cssText = 'color:#C9526E; font-size:13px;';
       icon.textContent = '✉';
