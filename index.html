@@ -537,6 +537,11 @@ function handleOverlayClick(e) {
   if (e.target === document.getElementById('overlay')) closeModal();
 }
 
+// supaya bisa dipanggil dari onclick HTML
+window.showModal = showModal;
+window.closeModal = closeModal;
+window.handleOverlayClick = handleOverlayClick;
+
 function spawnConfetti() {
   const colors = ['#C9526E','#ED93B1','#F4C0D1','#EDAABB','#D4537E'];
   for (let n = 0; n < 28; n++) {
