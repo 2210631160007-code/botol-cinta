@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Botol Cinta</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --rose:      #C9526E;
+    --rose-mid:  #D4718A;
+    --rose-pale: #EDAABB;
+    --blush:     #F7DDE5;
+    --cream:     #FDF6F0;
+    --paper:     #FEF9F6;
+    --ink:       #2E1A22;
+    --muted:     #8C6070;
+    --light:     #B8899A;
+    --border:    rgba(201,82,110,0.18);
+    --r: 16px;
+  }
+
+  html { background: var(--cream); }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--cream);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 1rem 4rem;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    text-align: center;
+    margin-bottom: 2.5rem;
+    animation: fadeUp .8s ease both;
+  }
+
+  .bottle-wrap {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 1.25rem;
+  }
+
+  .bottle-wrap svg { display: block; }
+
+  .sparkle {
+    position: absolute;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--rose-pale);
+    animation: sparkle 2.4s ease-in-out infinite;
+  }
+  .sparkle:nth-child(1) { top: 10px; left: 2px;  animation-delay: 0s;    opacity: .7; }
+  .sparkle:nth-child(2) { top: 30px; right: 0px; animation-delay: .6s;   opacity: .5; width:4px; height:4px; }
+  .sparkle:nth-child(3) { bottom: 30px; left: 0px; animation-delay: 1.2s; opacity: .6; }
+  .sparkle:nth-child(4) { bottom: 10px; right: 4px; animation-delay: 1.8s; opacity: .4; width:5px;height:5px; }
+
+  @keyframes sparkle {
+    0%,100% { transform: scale(1); opacity: .5; }
+    50%      { transform: scale(1.6); opacity: 1; }
+  }
+
+  .title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.4rem;
+    font-weight: 400;
+    color: var(--ink);
+    letter-spacing: .02em;
+    line-height: 1.1;
+  }
+
+  .tagline {
+    font-size: .8rem;
+    color: var(--light);
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    margin-top: .35rem;
+    font-weight: 300;
+  }
+
+  /* ─── COUNTER ─── */
+  .stats {
+    display: flex;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    overflow: hidden;
+    margin-bottom: 2.5rem;
+    animation: fadeUp .8s .2s ease both;
+  }
+
+  .stat {
+    background: var(--paper);
+    padding: 8px 24px;
+    font-size: .75rem;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    letter-spacing: .04em;
+  }
+
+  .stat strong {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--rose);
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+  }
+
+  /* ─── GRID ─── */
+  .grid-wrap {
+    width: 100%;
+    max-width: 440px;
+    animation: fadeUp .8s .35s ease both;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 8px;
+    margin-bottom: 1rem;
+  }
+
+  .cell {
+    aspect-ratio: 1;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: var(--paper);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    position: relative;
+    transition: transform .18s, border-color .18s, background .18s;
+    overflow: hidden;
+  }
+
+  .cell::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 0%, rgba(201,82,110,.06), transparent 70%);
+    opacity: 0;
+    transition: opacity .18s;
+  }
+
+  .cell.available {
+    border-color: var(--rose-mid);
+    border-width: 1.5px;
+    cursor: pointer;
+  }
+  .cell.available:hover { transform: translateY(-3px) scale(1.06); }
+  .cell.available:hover::before { opacity: 1; }
+  .cell.available:active { transform: scale(.97); }
+
+  .cell.opened {
+    background: linear-gradient(145deg, #FDF0F3, #FAE5EC);
+    border-color: var(--rose-pale);
+    cursor: default;
+  }
+
+  .cell.locked {
+    opacity: .38;
+    cursor: not-allowed;
+  }
+
+  .cell-num {
+    font-size: 9px;
+    font-weight: 500;
+    color: var(--light);
+    letter-spacing: .05em;
+  }
+  .cell.opened .cell-num { color: var(--rose-mid); }
+  .cell.available .cell-num { color: var(--rose); }
+
+  .cell-icon {
+    font-size: 15px;
+    line-height: 1;
+  }
+
+  /* ─── NOTICE ─── */
+  .notice {
+    text-align: center;
+    font-size: .78rem;
+    color: var(--rose);
+    background: rgba(201,82,110,.07);
+    border: 1px solid rgba(201,82,110,.18);
+    border-radius: 10px;
+    padding: 10px 16px;
+    display: none;
+    margin-top: .5rem;
+    animation: fadeIn .3s ease;
+  }
+
+  /* ─── MODAL ─── */
+  .overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(30,10,18,.55);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    padding: 1.5rem;
+  }
+  .overlay.show { display: flex; }
+
+  .modal {
+    background: var(--paper);
+    border-radius: 24px;
+    border: 1px solid var(--border);
+    padding: 2.5rem 2rem 2rem;
+    max-width: 340px;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    animation: modalIn .35s cubic-bezier(.34,1.56,.64,1) both;
+  }
+
+  @keyframes modalIn {
+    from { opacity: 0; transform: scale(.85) translateY(12px); }
+    to   { opacity: 1; transform: scale(1)   translateY(0); }
+  }
+
+  .modal-deco {
+    position: absolute;
+    top: -1px; left: 50%; transform: translateX(-50%);
+    width: 48px; height: 4px;
+    background: linear-gradient(90deg, var(--rose-pale), var(--rose), var(--rose-pale));
+    border-radius: 0 0 4px 4px;
+  }
+
+  .modal-label {
+    font-size: .65rem;
+    letter-spacing: .25em;
+    text-transform: uppercase;
+    color: var(--rose-mid);
+    margin-bottom: 1rem;
+    font-weight: 500;
+  }
+
+  .modal-heart {
+    font-size: 28px;
+    line-height: 1;
+    margin-bottom: 1rem;
+    animation: heartbeat 1.8s ease-in-out infinite;
+  }
+
+  @keyframes heartbeat {
+    0%,100% { transform: scale(1); }
+    14%      { transform: scale(1.15); }
+    28%      { transform: scale(1); }
+    42%      { transform: scale(1.08); }
+    56%      { transform: scale(1); }
+  }
+
+  .modal-msg {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-style: italic;
+    font-weight: 300;
+    line-height: 1.75;
+    color: var(--ink);
+    margin-bottom: 2rem;
+  }
+
+  .modal-line {
+    width: 40px;
+    height: 1px;
+    background: var(--rose-pale);
+    margin: 0 auto 1.5rem;
+  }
+
+  .modal-close {
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 9px 28px;
+    font-size: .8rem;
+    font-family: 'Outfit', sans-serif;
+    color: var(--muted);
+    cursor: pointer;
+    letter-spacing: .06em;
+    transition: background .15s, color .15s, border-color .15s;
+  }
+  .modal-close:hover {
+    background: var(--blush);
+    border-color: var(--rose-pale);
+    color: var(--rose);
+  }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  /* ─── CONFETTI ─── */
+  .confetti-piece {
+    position: fixed;
+    width: 8px; height: 8px;
+    border-radius: 2px;
+    pointer-events: none;
+    z-index: 200;
+    animation: confettiFall linear forwards;
+  }
+  @keyframes confettiFall {
+    0%   { transform: translateY(-10px) rotate(0deg);   opacity: 1; }
+    100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+  }
+
+  /* ─── FOOTER ─── */
+  .footer {
+    margin-top: 3rem;
+    font-size: .72rem;
+    color: var(--light);
+    letter-spacing: .1em;
+    text-align: center;
+    animation: fadeUp .8s .5s ease both;
+  }
+  .footer span { color: var(--rose-pale); }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="bottle-wrap">
+    <div class="sparkle"></div>
+    <div class="sparkle"></div>
+    <div class="sparkle"></div>
+    <div class="sparkle"></div>
+    <svg width="72" height="110" viewBox="0 0 72 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Cork -->
+      <rect x="24" y="2" width="24" height="13" rx="5" fill="#F4C0D1" stroke="#C9526E" stroke-width="1.2"/>
+      <rect x="24" y="14" width="24" height="5" rx="0" fill="#EDAABB" opacity=".6"/>
+      <!-- Body -->
+      <path d="M17 26 Q10 38 10 55 L10 90 Q10 103 24 103 L48 103 Q62 103 62 90 L62 55 Q62 38 55 26 Z"
+            fill="#FDF0F4" stroke="#C9526E" stroke-width="1.2"/>
+      <!-- Liquid fill gradient suggestion via opacity layers -->
+      <path d="M10 65 Q36 70 62 65 L62 90 Q62 103 48 103 L24 103 Q10 103 10 90 Z" fill="#F4C0D1" opacity=".25"/>
+      <!-- Bubbles -->
+      <circle cx="36" cy="78" r="5"   fill="#ED93B1" opacity=".5"/>
+      <circle cx="24" cy="88" r="3.5" fill="#ED93B1" opacity=".4"/>
+      <circle cx="48" cy="85" r="4"   fill="#ED93B1" opacity=".45"/>
+      <circle cx="30" cy="95" r="2.5" fill="#C9526E" opacity=".3"/>
+      <circle cx="44" cy="74" r="2"   fill="#C9526E" opacity=".35"/>
+      <circle cx="20" cy="75" r="1.5" fill="#ED93B1" opacity=".3"/>
+      <!-- Waterline -->
+      <path d="M10.5 64 Q23 68 36 64 Q49 60 61.5 64" stroke="#ED93B1" stroke-width=".8" fill="none" stroke-dasharray="3 2"/>
+      <!-- Heart in bottle -->
+      <path d="M36 58 C36 58 29 51 29 46.5 C29 43.4 31.5 41 34.5 41 C35.6 41 36.6 41.5 37 42.2 C37.4 41.5 38.4 41 39.5 41 C42.5 41 45 43.4 45 46.5 C45 51 38 58 36 58 Z" fill="#D4537E" opacity=".55"/>
+    </svg>
+  </div>
+  <h1 class="title">Botol Cinta</h1>
+  <p class="tagline">30 pesan — satu setiap hari</p>
+</div>
+
+<div class="stats">
+  <div class="stat"><strong id="opened-n">0</strong> dibuka</div>
+  <div class="stat" style="background:var(--blush);"><strong id="remain-n">30</strong> tersisa</div>
+</div>
+
+<div class="grid-wrap">
+  <div class="grid" id="grid"></div>
+  <div class="notice" id="notice">Pesan hari ini sudah dibuka. Sampai besok ya 🌙</div>
+</div>
+
+<!-- Modal -->
+<div class="overlay" id="overlay" onclick="handleOverlayClick(event)">
+  <div class="modal" id="modal">
+    <div class="modal-deco"></div>
+    <p class="modal-label" id="modal-label">Hari ke-1</p>
+    <div class="modal-heart">🌸</div>
+    <div class="modal-line"></div>
+    <p class="modal-msg" id="modal-msg"></p>
+    <button class="modal-close" onclick="closeModal()">Tutup</button>
+  </div>
+</div>
+
+<p class="footer">dibuat dengan <span>♥</span> khusus untukmu</p>
+
+<script>
+const MESSAGES = [
+  "Kamu mungkin tidak selalu tahu betapa berharganya kehadiranmu — tapi aku tahu, dan aku ingin kamu percaya itu.",
+  "Ada momen-momen kecil bersamamu yang diam-diam aku simpan, karena rasanya terlalu berharga untuk dilupakan.",
+  "Kamu tidak perlu sempurna untuk dicintai. Kamu hanya perlu jadi kamu — dan itu sudah lebih dari cukup.",
+  "Kalau hari ini terasa berat, ingat: kamu sudah melewati hari-hari yang lebih berat dari ini. Dan kamu masih di sini.",
+  "Aku suka cara kamu peduli, bahkan pada hal-hal yang orang lain anggap sepele.",
+  "Keberadaanmu membuat dunia terasa sedikit lebih hangat dari seharusnya.",
+  "Kamu layak mendapat cinta yang tidak membuatmu ragu — cinta yang datang dengan tenang dan penuh.",
+  "Setiap versi dirimu yang pernah ada punya tempat di hatiku — termasuk yang sedang berjuang hari ini.",
+  "Aku tidak butuh alasan untuk menyukaimu. Kamu sendiri sudah jadi alasan yang cukup.",
+  "Semoga hari ini memberimu setidaknya satu momen kecil yang membuatmu senyum sendiri.",
+  "Jangan lupa: kamu tidak harus kuat sendirian. Ada tangan yang siap menemanimu kapanpun kamu butuh.",
+  "Cara kamu melihat dunia — dengan keingintahuan dan kehangatan itu — adalah sesuatu yang jarang dan indah.",
+  "Kamu bukan beban. Kamu adalah seseorang yang berhak mengambil ruang, merasa lelah, dan tetap dicintai.",
+  "Terima kasih sudah mau terbuka. Itu butuh keberanian yang tidak semua orang punya.",
+  "Kamu adalah jenis orang yang membekas — bukan karena berisik, tapi karena tulus.",
+  "Di hari-hari yang paling biasa sekalipun, kamu tetap luar biasa bagiku.",
+  "Aku bangga padamu, bukan hanya saat kamu berhasil, tapi juga saat kamu memilih untuk terus mencoba.",
+  "Semua yang kamu rasakan itu valid — bahkan saat tidak ada kata yang cukup untuk menjelaskannya.",
+  "Kamu membawa sesuatu ke setiap ruangan yang kamu masuki — sebuah energi yang sulit dijelaskan tapi mudah dirasakan.",
+  "Bukan hal kecil, bisa jadi seseorang yang membuat orang lain merasa didengar. Kamu melakukannya.",
+  "Aku harap kamu bisa melihat dirimu dari sudut pandangku — seseorang yang layak dicintai sepenuhnya.",
+  "Bahkan saat kamu diam, kehadiranmu sudah menjadi kenyamanan tersendiri.",
+  "Perjalananmu tidak harus linier. Mundur selangkah pun bukan kegagalan — itu bagian dari prosesmu.",
+  "Kamu lebih kuat dari yang kamu sadari, dan lebih lembut dari yang kamu akui.",
+  "Aku ingin kamu tahu: memilihmu, setiap harinya, adalah keputusan yang tidak pernah aku sesali.",
+  "Terima kasih sudah ada. Sesederhana itu, dan sehebat itu.",
+  "Kamu tidak perlu membuktikan apa-apa hari ini. Cukup ada, cukup bernapas — itu sudah cukup.",
+  "Saat dunia terasa terlalu keras, aku ingin jadi tempat yang paling lunak untukmu.",
+  "Ada hal yang tidak akan pernah berubah: kamu selalu punya tempat di hidupku.",
+  "Tiga puluh hari, tiga puluh pesan — dan masih belum cukup untuk mengatakan betapa berartinya kamu. Aku cinta kamu."
+];
+
+const KEY = 'botol_cinta_v2';
+
+function load() {
+  try { const r = localStorage.getItem(KEY); if (r) return JSON.parse(r); } catch(e) {}
+  return { opened: {}, lastDate: null };
+}
+function save(s) {
+  try { localStorage.setItem(KEY, JSON.stringify(s)); } catch(e) {}
+}
+function today() {
+  const d = new Date();
+  return `${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()}`;
+}
+
+let state = load();
+
+function nextIdx() {
+  for (let i = 0; i < 30; i++) if (!state.opened[i]) return i;
+  return -1;
+}
+
+function canOpen() { return state.lastDate !== today(); }
+
+function openCell(i) {
+  if (i !== nextIdx()) return;
+  if (!canOpen()) {
+    const n = document.getElementById('notice');
+    n.style.display = 'block';
+    setTimeout(() => n.style.display = 'none', 3500);
+    return;
+  }
+  state.opened[i] = true;
+  state.lastDate = today();
+  save(state);
+  render();
+  spawnConfetti();
+  setTimeout(() => showModal(i), 300);
+}
+
+function showModal(i) {
+  document.getElementById('modal-label').textContent = `Hari ke-${i + 1}`;
+  document.getElementById('modal-msg').textContent = MESSAGES[i];
+  document.getElementById('overlay').classList.add('show');
+}
+
+function closeModal() {
+  document.getElementById('overlay').classList.remove('show');
+}
+
+function handleOverlayClick(e) {
+  if (e.target === document.getElementById('overlay')) closeModal();
+}
+
+function spawnConfetti() {
+  const colors = ['#C9526E','#ED93B1','#F4C0D1','#EDAABB','#D4537E'];
+  for (let n = 0; n < 28; n++) {
+    const el = document.createElement('div');
+    el.className = 'confetti-piece';
+    el.style.cssText = `
+      left: ${Math.random()*100}vw;
+      top: -10px;
+      background: ${colors[Math.floor(Math.random()*colors.length)]};
+      width: ${5 + Math.random()*6}px;
+      height: ${5 + Math.random()*6}px;
+      border-radius: ${Math.random() > .5 ? '50%' : '2px'};
+      animation-duration: ${1.6 + Math.random()*1.4}s;
+      animation-delay: ${Math.random()*.4}s;
+    `;
+    document.body.appendChild(el);
+    el.addEventListener('animationend', () => el.remove());
+  }
+}
+
+const ICONS = { opened: '♥', available: '✉', locked: '·' };
+
+function render() {
+  const grid  = document.getElementById('grid');
+  const next  = nextIdx();
+  const count = Object.keys(state.opened).length;
+
+  document.getElementById('opened-n').textContent = count;
+  document.getElementById('remain-n').textContent = 30 - count;
+  grid.innerHTML = '';
+
+  for (let i = 0; i < 30; i++) {
+    const cell = document.createElement('div');
+    cell.className = 'cell';
+
+    const num  = document.createElement('div');
+    num.className = 'cell-num';
+    num.textContent = String(i + 1).padStart(2, '0');
+
+    const icon = document.createElement('div');
+    icon.className = 'cell-icon';
+
+    if (state.opened[i]) {
+      cell.classList.add('opened');
+      icon.style.cssText = 'color:#C9526E; font-size:14px;';
+      icon.textContent = '♥';
+    } else if (i === next) {
+      cell.classList.add('available');
+      icon.style.cssText = 'color:#C9526E; font-size:13px;';
+      icon.textContent = '✉';
+      cell.onclick = () => openCell(i);
+    } else {
+      cell.classList.add('locked');
+      icon.style.cssText = 'color:#C9A0AE; font-size:10px; letter-spacing:3px;';
+      icon.textContent = '···';
+    }
+
+    cell.appendChild(num);
+    cell.appendChild(icon);
+    grid.appendChild(cell);
+  }
+}
+
+render();
+</script>
+</body>
+</html>
