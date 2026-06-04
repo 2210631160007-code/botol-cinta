@@ -163,11 +163,15 @@
   .cell.available:hover::before { opacity: 1; }
   .cell.available:active { transform: scale(.97); }
 
-  .cell.opened {
-    background: linear-gradient(145deg, #FDF0F3, #FAE5EC);
-    border-color: var(--rose-pale);
-    cursor: default;
-  }
+ .cell.opened {
+  background: linear-gradient(145deg, #FDF0F3, #FAE5EC);
+  border-color: var(--rose-pale);
+  cursor: pointer;
+}
+
+.cell.opened:hover {
+  transform: translateY(-2px);
+}
 
   .cell.locked {
     opacity: .38;
@@ -201,6 +205,15 @@
     margin-top: .5rem;
     animation: fadeIn .3s ease;
   }
+
+ .countdown {
+  margin-top: 12px;
+  text-align: center;
+  color: var(--rose);
+  font-size: .8rem;
+  font-weight: 500;
+  line-height: 1.5;
+}
 
   /* ─── MODAL ─── */
   .overlay {
@@ -378,8 +391,11 @@
 
 <div class="grid-wrap">
   <div class="grid" id="grid"></div>
-  <div class="notice" id="notice">Pesan hari ini sudah dibuka. Sampai besok ya 🌙</div>
+  <div class="notice" id="notice">
+  Pesan hari ini sudah dibuka. Sampai besok ya 🌙
 </div>
+
+<div class="countdown" id="countdown"></div>
 
 <!-- Modal -->
 <div class="overlay" id="overlay" onclick="handleOverlayClick(event)">
@@ -504,6 +520,31 @@ function spawnConfetti() {
 
 const ICONS = { opened: '♥', available: '✉', locked: '·' };
 
+function updateCountdown() {
+
+  const el = document.getElementById('countdown');
+
+  if (canOpen()) {
+    el.innerHTML = '';
+    return;
+  }
+
+  const now = new Date();
+
+  const tomorrow = new Date();
+  tomorrow.setDate(now.getDate() + 1);
+  tomorrow.setHours(0,0,0,0);
+
+  const diff = tomorrow - now;
+
+  const h = Math.floor(diff / 3600000);
+  const m = Math.floor((diff % 3600000) / 60000);
+  const s = Math.floor((diff % 60000) / 1000);
+
+  el.innerHTML =
+    `⏳ Pesan berikutnya dalam<br><strong>${h}j ${m}m ${s}d</strong>`;
+}
+
 function render() {
   const grid  = document.getElementById('grid');
   const next  = nextIdx();
@@ -549,6 +590,12 @@ function render() {
 }
 
 render();
+
+updateCountdown();
+
+setInterval(() => {
+  updateCountdown();
+}, 1000);
 </script>
 </body>
 </html>
