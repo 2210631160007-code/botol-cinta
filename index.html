@@ -407,7 +407,7 @@
     <div class="modal-heart">🌸</div>
     <div class="modal-line"></div>
     <p class="modal-msg" id="modal-msg"></p>
-    <button class="modal-close" onclick="closeModal()">Tutup</button>
+    <button class="modal-close" id="btnClose">Tutup</button>
   </div>
 </div>
 
@@ -541,6 +541,10 @@ function handleOverlayClick(e) {
 window.showModal = showModal;
 window.closeModal = closeModal;
 window.handleOverlayClick = handleOverlayClick;
+
+ document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("btnClose").addEventListener("click", closeModal);
+});
 
 function spawnConfetti() {
   const colors = ['#C9526E','#ED93B1','#F4C0D1','#EDAABB','#D4537E'];
