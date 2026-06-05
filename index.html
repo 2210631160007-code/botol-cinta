@@ -625,9 +625,7 @@ function nextIdx() {
   return -1;
 }
 
-function canOpen() { 
-  return true; 
-}
+function canOpen() { return state.lastDate !== today(); }
 
 async function openCell(i) {
   if (i !== nextIdx()) return;
