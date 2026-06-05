@@ -64,5 +64,40 @@ h1{
   <img src="30.jpg">
 </div>
 
+<audio id="bgMusic" loop>
+  <source src="lagu.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const music = document.getElementById("bgMusic");
+
+const savedTime = localStorage.getItem("musicTime");
+
+music.addEventListener("loadedmetadata", async () => {
+
+  if(savedTime){
+    music.currentTime = parseFloat(savedTime);
+  }
+
+  try{
+    await music.play();
+  }catch(e){
+
+      document.addEventListener("click", () => {
+      music.play();
+    }, { once:true });
+
+  }
+
+});
+
+// Simpan posisi lagu terus menerus
+setInterval(() => {
+  if(!music.paused){
+    localStorage.setItem("musicTime", music.currentTime);
+  }
+}, 1000);
+</script>
+
 </body>
 </html>
