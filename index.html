@@ -35,6 +35,7 @@
     padding: 2rem 1rem 4rem;
   }
 
+  /* ─── HERO ─── */
   .hero {
     text-align: center;
     margin-bottom: 2.5rem;
@@ -84,6 +85,7 @@
     font-weight: 300;
   }
 
+  /* ─── COUNTER ─── */
   .stats {
     display: flex;
     gap: 1px;
@@ -114,6 +116,7 @@
     font-style: italic;
   }
 
+  /* ─── GRID ─── */
   .grid-wrap {
     width: 100%;
     max-width: 440px;
@@ -160,12 +163,15 @@
   .cell.available:hover::before { opacity: 1; }
   .cell.available:active { transform: scale(.97); }
 
-  .cell.opened {
-    background: linear-gradient(145deg, #FDF0F3, #FAE5EC);
-    border-color: var(--rose-pale);
-    cursor: pointer;
-  }
-  .cell.opened:hover { transform: translateY(-2px); }
+ .cell.opened {
+  background: linear-gradient(145deg, #FDF0F3, #FAE5EC);
+  border-color: var(--rose-pale);
+  cursor: pointer;
+}
+
+.cell.opened:hover {
+  transform: translateY(-2px);
+}
 
   .cell.locked {
     opacity: .38;
@@ -186,6 +192,7 @@
     line-height: 1;
   }
 
+  /* ─── NOTICE ─── */
   .notice {
     text-align: center;
     font-size: .78rem;
@@ -199,15 +206,16 @@
     animation: fadeIn .3s ease;
   }
 
-  .countdown {
-    margin-top: 12px;
-    text-align: center;
-    color: var(--rose);
-    font-size: .8rem;
-    font-weight: 500;
-    line-height: 1.5;
-  }
+ .countdown {
+  margin-top: 12px;
+  text-align: center;
+  color: var(--rose);
+  font-size: .8rem;
+  font-weight: 500;
+  line-height: 1.5;
+}
 
+  /* ─── MODAL ─── */
   .overlay {
     display: none;
     position: fixed;
@@ -234,7 +242,7 @@
     text-align: center;
     position: relative;
     animation: modalIn .35s cubic-bezier(.34,1.56,.64,1) both;
-  }
+}
 
   @keyframes modalIn {
     from { opacity: 0; transform: scale(.85) translateY(12px); }
@@ -283,7 +291,7 @@
     margin-bottom: 2rem;
     text-align: left;
     white-space: pre-line;
-  }
+}
 
   .modal-line {
     width: 40px;
@@ -310,6 +318,7 @@
     color: var(--rose);
   }
 
+  /* ─── ANIMATIONS ─── */
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(18px); }
     to   { opacity: 1; transform: translateY(0); }
@@ -319,6 +328,7 @@
     to   { opacity: 1; }
   }
 
+  /* ─── CONFETTI ─── */
   .confetti-piece {
     position: fixed;
     width: 8px; height: 8px;
@@ -332,44 +342,48 @@
     100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
   }
 
+  /* ─── FOOTER ─── */
   .footer {
-    margin-top: 3rem;
-    font-size: .72rem;
-    color: var(--light);
-    letter-spacing: .1em;
-    text-align: center;
-    animation: fadeUp .8s .5s ease both;
-  }
-  .footer span { color: var(--rose-pale); }
+  margin-top: 3rem;
+  font-size: .72rem;
+  color: var(--light);
+  letter-spacing: .1em;
+  text-align: center;
+  animation: fadeUp .8s .5s ease both;
+}
+.footer span { color: var(--rose-pale); }
 
-  .gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 15px;
-  }
-  .gallery img {
-    width: 100%;
-    border-radius: 15px;
-  }
+.gallery{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(150px,1fr));
+  gap:15px;
+}
 
-  .secret-gift {
-    margin-top: 30px;
-    text-align: center;
-  }
-  .secret-gift a {
-    text-decoration: none;
-    background: var(--rose);
-    color: white;
-    padding: 12px 22px;
-    border-radius: 999px;
-    display: inline-block;
-    font-size: .85rem;
-    transition: .2s;
-  }
-  .secret-gift a:hover {
-    transform: translateY(-2px);
-    background: var(--rose-mid);
-  }
+.gallery img{
+  width:100%;
+  border-radius:15px;
+}
+
+ .secret-gift{
+  margin-top: 30px;
+  text-align: center;
+}
+
+.secret-gift a{
+  text-decoration: none;
+  background: var(--rose);
+  color: white;
+  padding: 12px 22px;
+  border-radius: 999px;
+  display: inline-block;
+  font-size: .85rem;
+  transition: .2s;
+}
+
+.secret-gift a:hover{
+  transform: translateY(-2px);
+  background: var(--rose-mid);
+}
  
 </style>
 </head>
@@ -382,18 +396,24 @@
     <div class="sparkle"></div>
     <div class="sparkle"></div>
     <svg width="72" height="110" viewBox="0 0 72 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Cork -->
       <rect x="24" y="2" width="24" height="13" rx="5" fill="#F4C0D1" stroke="#C9526E" stroke-width="1.2"/>
       <rect x="24" y="14" width="24" height="5" rx="0" fill="#EDAABB" opacity=".6"/>
+      <!-- Body -->
       <path d="M17 26 Q10 38 10 55 L10 90 Q10 103 24 103 L48 103 Q62 103 62 90 L62 55 Q62 38 55 26 Z"
             fill="#FDF0F4" stroke="#C9526E" stroke-width="1.2"/>
+      <!-- Liquid fill gradient suggestion via opacity layers -->
       <path d="M10 65 Q36 70 62 65 L62 90 Q62 103 48 103 L24 103 Q10 103 10 90 Z" fill="#F4C0D1" opacity=".25"/>
+      <!-- Bubbles -->
       <circle cx="36" cy="78" r="5"   fill="#ED93B1" opacity=".5"/>
       <circle cx="24" cy="88" r="3.5" fill="#ED93B1" opacity=".4"/>
       <circle cx="48" cy="85" r="4"   fill="#ED93B1" opacity=".45"/>
       <circle cx="30" cy="95" r="2.5" fill="#C9526E" opacity=".3"/>
       <circle cx="44" cy="74" r="2"   fill="#C9526E" opacity=".35"/>
       <circle cx="20" cy="75" r="1.5" fill="#ED93B1" opacity=".3"/>
+      <!-- Waterline -->
       <path d="M10.5 64 Q23 68 36 64 Q49 60 61.5 64" stroke="#ED93B1" stroke-width=".8" fill="none" stroke-dasharray="3 2"/>
+      <!-- Heart in bottle -->
       <path d="M36 58 C36 58 29 51 29 46.5 C29 43.4 31.5 41 34.5 41 C35.6 41 36.6 41.5 37 42.2 C37.4 41.5 38.4 41 39.5 41 C42.5 41 45 43.4 45 46.5 C45 51 38 58 36 58 Z" fill="#D4537E" opacity=".55"/>
     </svg>
   </div>
@@ -408,11 +428,15 @@
 
 <div class="grid-wrap">
   <div class="grid" id="grid"></div>
-  <div class="notice" id="notice">Pesan hari ini sudah dibuka. Sampai besok ya 🌙</div>
+
+  <div class="notice" id="notice">
+    Pesan hari ini sudah dibuka. Sampai besok ya 🌙
+  </div>
+
   <div class="countdown" id="countdown"></div>
 </div>
 
-<!-- Modal pesan biasa -->
+<!-- Modal -->
 <div class="overlay" id="overlay" onclick="handleOverlayClick(event)">
   <div class="modal" id="modal">
     <div class="modal-deco"></div>
@@ -424,77 +448,80 @@
   </div>
 </div>
 
-<!-- Modal mood popup hari ke-2 -->
-<div class="overlay" id="moodOverlay" onclick="moodOverlayClick(event)">
-  <div class="modal">
-    <div class="modal-deco"></div>
-
-    <!-- Step 1: pertanyaan mood -->
-    <div id="mood-step1">
-      <p class="modal-label">Hari ke-2</p>
-      <div class="modal-heart" id="mood-icon-el">🌸</div>
-      <div class="modal-line"></div>
-      <p class="modal-msg" style="text-align:center;">
-        Sebelum buka pesan...<br>Gimana mood kamu sekarang?
-      </p>
-      <div style="display:flex;justify-content:center;gap:12px;margin-top:.5rem;">
-        <button
-          class="modal-close"
-          onclick="pilihMoodBaik()"
-          style="background:var(--rose);color:white;border-color:var(--rose);">
-          Baik 🌤️
-        </button>
-        <button class="modal-close" onclick="pilihMoodTidak()">
-          Tidak 🌧️
-        </button>
-      </div>
-    </div>
-
-    <!-- Step 2: respons setelah pilih mood -->
-    <div id="mood-step2" style="display:none;">
-      <p class="modal-label" id="mood-resp-label"></p>
-      <div class="modal-heart" id="mood-resp-icon"></div>
-      <div class="modal-line"></div>
-      <p class="modal-msg" id="mood-resp-msg" style="text-align:center;"></p>
-      <button class="modal-close" onclick="lanjutKePesan()">
-        Buka pesan hari ini 💌
-      </button>
-    </div>
-  </div>
-</div>
-
 <div class="secret-gift">
   <a href="#" onclick="openGift(); return false;">🎁 Hadiah Untuk Herul</a>
 </div>
 
 <div class="overlay" id="giftOverlay" onclick="giftOverlayClick(event)">
+
   <div class="modal" style="max-width:900px;">
-    <div style="text-align:left; margin-bottom:15px;">
-      <button class="modal-close" onclick="closeGift()">← Kembali</button>
-    </div>
-    <div class="modal-deco"></div>
-    <h2 style="margin-bottom:20px;">🎁 Hadiah Untuk Herul ❤️</h2>
-    <div class="gallery">
-      <img src="1.jpg"><img src="2.jpg"><img src="3.jpg"><img src="4.jpg"><img src="5.jpg">
-      <img src="6.jpg"><img src="7.jpg"><img src="8.jpg"><img src="9.jpg"><img src="10.jpg">
-      <img src="11.jpg"><img src="12.jpg"><img src="13.jpg"><img src="14.jpg"><img src="15.jpg">
-      <img src="16.jpg"><img src="17.jpg"><img src="18.jpg"><img src="19.jpg"><img src="20.jpg">
-      <img src="21.jpg"><img src="22.jpg"><img src="23.jpg"><img src="24.jpg"><img src="25.jpg">
-      <img src="26.jpg"><img src="27.jpg"><img src="28.jpg"><img src="29.jpg"><img src="30.jpg">
-    </div>
-    <br>
-    <button class="modal-close" onclick="closeGift()">Tutup</button>
-  </div>
+
+   <div style="text-align:left; margin-bottom:15px;">
+  <button class="modal-close" onclick="closeGift()">
+    ← Kembali
+  </button>
 </div>
 
+    <div class="modal-deco"></div>
+
+    <h2 style="margin-bottom:20px;">
+      🎁 Hadiah Untuk Herul ❤️
+    </h2>
+
+    <div class="gallery">
+
+      <img src="1.jpg">
+      <img src="2.jpg">
+      <img src="3.jpg">
+      <img src="4.jpg">
+      <img src="5.jpg">
+      <img src="6.jpg">
+      <img src="7.jpg">
+      <img src="8.jpg">
+      <img src="9.jpg">
+      <img src="10.jpg">
+      <img src="11.jpg">
+      <img src="12.jpg">
+      <img src="13.jpg">
+      <img src="14.jpg">
+      <img src="15.jpg">
+      <img src="16.jpg">
+      <img src="17.jpg">
+      <img src="18.jpg">
+      <img src="19.jpg">
+      <img src="20.jpg">
+      <img src="21.jpg">
+      <img src="22.jpg">
+      <img src="23.jpg">
+      <img src="24.jpg">
+      <img src="25.jpg">
+      <img src="26.jpg">
+      <img src="27.jpg">
+      <img src="28.jpg">
+      <img src="29.jpg">
+      <img src="30.jpg">
+
+    </div>
+
+    <br>
+
+    <button class="modal-close" onclick="closeGift()">
+      Tutup
+    </button>
+
+  </div>
+
+</div>
+ 
 <p class="footer">dibuat dengan <span>♥</span> khusus untukmu Herul Muhammad</p>
 
-<audio id="bgMusic" loop>
+ <audio id="bgMusic" loop>
   <source src="lagu.mp3" type="audio/mpeg">
 </audio>
-
+ 
 <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+ import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+
 import {
   getFirestore,
   doc,
@@ -512,24 +539,23 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const db  = getFirestore(app);
-
+const db = getFirestore(app);
 const MESSAGES = [
-  `Hallo Herullll botakk 🤍
+   `Hallo Herullll botakk 🤍
    
-Bagaimana mungkin aku tidak mencintaimu, ketika tanpa sadar kamu menjadi alasan aku menemukan kembali senyumku.
-
-Waktu pertama kali sebelum kenal kamu, aku jarang senyum. Paling cuma ketawa karena tingkah laku teman-teman. Aku ngerasa nggak produktif, begadang terus, dan saat nggak sibuk aku sering berpikir, "Kalau bangun pagi juga mau ngapain?"
-
-Lalu kamu hadir.
-
-Sekarang aku selalu nungguin kamu. Aku harap rasa excited ini tetap ada terus, supaya kamu nggak lupa dan nggak bosan sama aku. Banyak sebenarnya langkah yang harus aku pikirkan setelah lulus, banyak hal yang bikin overthinking, tapi sekarang aku jadi lebih sering berpikir positif.
-
-Karena aku merasa aku bisa.
-
-Dan sekarang aku punya penyemangat lagi, yaitu kamu.
-
-Makasih yaa 🤍`,
+   Bagaimana mungkin aku tidak mencintaimu, ketika tanpa sadar kamu menjadi alasan aku menemukan kembali senyumku.
+   
+   Waktu pertama kali sebelum kenal kamu, aku jarang senyum. Paling cuma ketawa karena tingkah laku teman-teman. Aku ngerasa nggak produktif, begadang terus, dan saat nggak sibuk aku sering berpikir, "Kalau bangun pagi juga mau ngapain?"
+   
+   Lalu kamu hadir.
+   
+   Sekarang aku selalu nungguin kamu. Aku harap rasa excited ini tetap ada terus, supaya kamu nggak lupa dan nggak bosan sama aku. Banyak sebenarnya langkah yang harus aku pikirkan setelah lulus, banyak hal yang bikin overthinking, tapi sekarang aku jadi lebih sering berpikir positif.
+   
+   Karena aku merasa aku bisa.
+   
+   Dan sekarang aku punya penyemangat lagi, yaitu kamu.
+   
+   Makasih yaa 🤍`,
   "Kamu mungkin enggak tahu betapa berharganya kehadiranmu — tapi aku tahu, dan aku ingin kamu percaya itu.",
   "Kamu tidak perlu sempurna untuk dicintai. Kamu hanya perlu jadi kamu — dan itu sudah lebih dari cukup.",
   "Kalau hari ini terasa berat, ingat: kamu sudah melewati hari-hari yang lebih berat dari ini. Dan kamu masih di sini.",
@@ -561,23 +587,38 @@ Makasih yaa 🤍`,
   "Tiga puluh hari, tiga puluh pesan — dan masih belum cukup untuk mengatakan betapa berartinya kamu. Aku cinta kamu."
 ];
 
-// ── Firebase ──────────────────────────────────────────
 async function load() {
-  const snap = await getDoc(doc(db, "botol_cinta", "ayang"));
-  return snap.exists() ? snap.data() : { opened: {}, lastDate: null };
+
+  const ref = doc(db, "botol_cinta", "ayang");
+
+  const snap = await getDoc(ref);
+
+  if (snap.exists()) {
+    return snap.data();
+  }
+
+  return {
+    opened: {},
+    lastDate: null
+  };
 }
 
 async function save(s) {
-  await setDoc(doc(db, "botol_cinta", "ayang"), s);
-}
 
-// ── State ─────────────────────────────────────────────
+  const ref = doc(db, "botol_cinta", "ayang");
+
+  await setDoc(ref, s);
+}
+ 
 function today() {
   const d = new Date();
   return `${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()}`;
 }
 
-let state = { opened: {}, lastDate: null };
+let state = {
+  opened: {},
+  lastDate: null
+};
 
 function nextIdx() {
   for (let i = 0; i < 30; i++) if (!state.opened[i]) return i;
@@ -586,12 +627,6 @@ function nextIdx() {
 
 function canOpen() { return state.lastDate !== today(); }
 
-// ── Mood popup state (di-reset tiap kali popup dibuka) ─
-let moodTidakCount  = 0;
-let moodPernahTidak = false;
-let moodTargetIdx   = 1;
-
-// ── Open cell ─────────────────────────────────────────
 async function openCell(i) {
   if (i !== nextIdx()) return;
   if (!canOpen()) {
@@ -601,21 +636,23 @@ async function openCell(i) {
     return;
   }
   state.opened[i] = true;
-  state.lastDate  = today();
+  state.lastDate = today();
   await save(state);
   render();
   spawnConfetti();
   setTimeout(() => showModal(i), 300);
 }
 
-// ── Modal pesan biasa ─────────────────────────────────
 function showModal(i) {
+
+  // Hari ke-2
   if (i === 1) {
     showMoodPopup(i);
     return;
   }
+
   document.getElementById('modal-label').textContent = `Hari ke-${i + 1}`;
-  document.getElementById('modal-msg').textContent   = MESSAGES[i];
+  document.getElementById('modal-msg').textContent = MESSAGES[i];
   document.getElementById('overlay').classList.add('show');
 }
 
@@ -627,99 +664,15 @@ function handleOverlayClick(e) {
   if (e.target === document.getElementById('overlay')) closeModal();
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+// supaya bisa dipanggil dari onclick HTML
+window.showModal = showModal;
+window.closeModal = closeModal;
+window.handleOverlayClick = handleOverlayClick;
+
+ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("btnClose").addEventListener("click", closeModal);
 });
 
-// ── Mood popup ────────────────────────────────────────
-function showMoodPopup(idx) {
-  moodTargetIdx   = idx;
-  moodTidakCount  = 0;
-  moodPernahTidak = false;
-
-  // Reset tampilan ke step 1
-  document.getElementById('mood-step1').style.display = 'block';
-  document.getElementById('mood-step2').style.display = 'none';
-  document.getElementById('mood-icon-el').textContent  = '🌸';
-
-  const btnBaik = document.querySelector('#mood-step1 button:first-of-type');
-  if (btnBaik) btnBaik.style.transform = 'scale(1)';
- 
-  document.getElementById('moodOverlay').classList.add('show');
-}
-
-function closeMoodPopup() {
-  document.getElementById('moodOverlay').classList.remove('show');
-}
-
-function moodOverlayClick(e) {
-  if (e.target === document.getElementById('moodOverlay')) closeMoodPopup();
-}
-
-function pilihMoodBaik() {
-  document.getElementById('mood-step1').style.display = 'none';
-  document.getElementById('mood-step2').style.display = 'block';
-
-  if (moodPernahTidak) {
-    document.getElementById('mood-resp-icon').textContent  = '🤍';
-    document.getElementById('mood-resp-label').textContent = 'Aku tau kok';
-    document.getElementById('mood-resp-msg').textContent   =
-`Aku tau kok, mungkin lagi nggak baik-baik aja.
-
-Nggak apa-apa.
-
-Kamu nggak harus selalu kuat dan selalu terlihat baik-baik saja.
-
-Tapi jangan berlarut yaa.
-
-Semoga besok sedikit lebih ringan dari hari ini.
-
-Semangat ya 🌱`;
-  } else {
-    document.getElementById('mood-resp-icon').textContent  = '🌸';
-    document.getElementById('mood-resp-label').textContent = 'Baguss!';
-    document.getElementById('mood-resp-msg').textContent   =
-`Baguss!
-
-Aku seneng banget liatnya 🥹
-
-Semoga mood baikmu selalu bertahan yaa.
-
-Dan kalau suatu saat nggak sebaik hari ini, ingat ya...
-
-Selalu ada pesan kecil yang nunggu kamu di sini 💌`;
-  }
-}
-
- function pilihMoodTidak() {
-  moodPernahTidak = true;
-  moodTidakCount  = Math.min(moodTidakCount + 1, 3);
-  const idx     = moodTidakCount - 1;
-  const btnBaik = document.querySelector('#mood-step1 button:first-of-type');
-  const scales  = [1.15, 1.32, 1.52];
-  btnBaik.style.transform  = `scale(${scales[idx]})`;
-  btnBaik.style.transition = 'transform .3s cubic-bezier(.34,1.56,.64,1)';
-}
-
-function lanjutKePesan() {
-  closeMoodPopup();
-  document.getElementById('modal-label').textContent = `Hari ke-${moodTargetIdx + 1}`;
-  document.getElementById('modal-msg').textContent   = MESSAGES[moodTargetIdx];
-  document.getElementById('overlay').classList.add('show');
-}
-
-// ── Gift ──────────────────────────────────────────────
-function openGift() {
-  document.getElementById("giftOverlay").classList.add("show");
-}
-function closeGift() {
-  document.getElementById("giftOverlay").classList.remove("show");
-}
-function giftOverlayClick(e) {
-  if (e.target === document.getElementById("giftOverlay")) closeGift();
-}
-
-// ── Confetti ──────────────────────────────────────────
 function spawnConfetti() {
   const colors = ['#C9526E','#ED93B1','#F4C0D1','#EDAABB','#D4537E'];
   for (let n = 0; n < 28; n++) {
@@ -740,22 +693,33 @@ function spawnConfetti() {
   }
 }
 
-// ── Countdown ─────────────────────────────────────────
+const ICONS = { opened: '♥', available: '✉', locked: '·' };
+
 function updateCountdown() {
+
   const el = document.getElementById('countdown');
-  if (canOpen()) { el.innerHTML = ''; return; }
-  const now      = new Date();
+
+  if (canOpen()) {
+    el.innerHTML = '';
+    return;
+  }
+
+  const now = new Date();
+
   const tomorrow = new Date();
   tomorrow.setDate(now.getDate() + 1);
   tomorrow.setHours(0,0,0,0);
+
   const diff = tomorrow - now;
+
   const h = Math.floor(diff / 3600000);
   const m = Math.floor((diff % 3600000) / 60000);
   const s = Math.floor((diff % 60000) / 1000);
-  el.innerHTML = `⏳ Pesan berikutnya dalam<br><strong>${h}j ${m}m ${s}d</strong>`;
+
+  el.innerHTML =
+    `⏳ Pesan berikutnya dalam<br><strong>${h}j ${m}m ${s}d</strong>`;
 }
 
-// ── Render grid ───────────────────────────────────────
 function render() {
   const grid  = document.getElementById('grid');
   const next  = nextIdx();
@@ -770,27 +734,28 @@ function render() {
     cell.className = 'cell';
 
     const num  = document.createElement('div');
-    num.className   = 'cell-num';
+    num.className = 'cell-num';
     num.textContent = String(i + 1).padStart(2, '0');
 
     const icon = document.createElement('div');
     icon.className = 'cell-icon';
 
     if (state.opened[i]) {
-      cell.classList.add('opened');
-      icon.style.cssText = 'color:#C9526E; font-size:14px;';
-      icon.textContent   = '♥';
-      cell.style.cursor  = 'pointer';
-      cell.onclick       = () => showModal(i);
-    } else if (i === next) {
+  cell.classList.add('opened');
+  icon.style.cssText = 'color:#C9526E; font-size:14px;';
+  icon.textContent = '♥';
+
+  cell.style.cursor = 'pointer';
+  cell.onclick = () => showModal(i);
+  }else if (i === next) {
       cell.classList.add('available');
       icon.style.cssText = 'color:#C9526E; font-size:13px;';
-      icon.textContent   = '✉';
-      cell.onclick       = () => openCell(i);
+      icon.textContent = '✉';
+      cell.onclick = () => openCell(i);
     } else {
       cell.classList.add('locked');
       icon.style.cssText = 'color:#C9A0AE; font-size:10px; letter-spacing:3px;';
-      icon.textContent   = '···';
+      icon.textContent = '···';
     }
 
     cell.appendChild(num);
@@ -799,38 +764,234 @@ function render() {
   }
 }
 
-// ── Expose globals ────────────────────────────────────
-window.showModal         = showModal;
-window.closeModal        = closeModal;
-window.handleOverlayClick = handleOverlayClick;
-window.pilihMoodBaik     = pilihMoodBaik;
-window.pilihMoodTidak    = pilihMoodTidak;
-window.lanjutKePesan     = lanjutKePesan;
-window.moodOverlayClick  = moodOverlayClick;
-window.openGift          = openGift;
-window.closeGift         = closeGift;
-window.giftOverlayClick  = giftOverlayClick;
+ (async () => {
 
-// ── Music ─────────────────────────────────────────────
-const music = document.getElementById("bgMusic");
-document.addEventListener("click", () => { music.play(); }, { once: true });
-music.addEventListener("loadedmetadata", () => {
-  const t = localStorage.getItem("musicTime");
-  if (t) music.currentTime = parseFloat(t);
-});
-setInterval(() => {
-  if (!music.paused) localStorage.setItem("musicTime", music.currentTime);
-}, 1000);
-
-// ── Init ──────────────────────────────────────────────
-(async () => {
   state = await load();
+
   render();
+
   updateCountdown();
-  setInterval(updateCountdown, 1000);
+
+  setInterval(() => {
+    updateCountdown();
+  }, 1000);
+
 })();
 
+ function closeMoodPopup() {
+  document.getElementById("moodOverlay").classList.remove("show");
+}
+
+function pilihMoodTidak() {
+
+  moodPernahTidak = true;
+  moodTidakCount++;
+
+  const btnBaik = document.getElementById("btn-baik");
+
+  const scale = Math.min(
+    1 + (moodTidakCount * 0.1),
+    1.3
+  );
+
+  btnBaik.style.transform = `scale(${scale})`;
+}
+
+function pilihMoodBaik(idx) {
+
+  document.getElementById("mood-step1").style.display = "none";
+
+  document.getElementById("mood-step2").style.display = "block";
+
+  if (moodPernahTidak) {
+
+    document.getElementById("mood-resp-icon").textContent = "🤍";
+
+    document.getElementById("mood-resp-label").textContent =
+      "Aku tau kok";
+
+    document.getElementById("mood-resp-msg").textContent =
+`Aku tau kok, mungkin lagi nggak baik-baik aja.
+
+Nggak apa-apa.
+
+Kamu nggak harus selalu kuat dan selalu terlihat baik-baik saja.
+
+Tapi jangan berlarut yaa.
+
+Semoga besok sedikit lebih ringan dari hari ini.
+
+Semangat ya 🌱`;
+
+  } else {
+
+    document.getElementById("mood-resp-icon").textContent = "🌸";
+
+    document.getElementById("mood-resp-label").textContent =
+      "Baguss!";
+
+    document.getElementById("mood-resp-msg").textContent =
+`Baguss!
+
+Aku seneng banget liatnya 🥹
+
+Semoga mood baikmu hari ini bertahan sampai malam nanti.
+
+Dan kalau suatu saat nggak sebaik hari ini, ingat ya...
+
+Selalu ada pesan kecil yang nunggu kamu di sini 💌`;
+  }
+}
+
+function lanjutKePesan(idx) {
+
+  closeMoodPopup();
+
+  document.getElementById('modal-label').textContent =
+    `Hari ke-${idx + 1}`;
+
+  document.getElementById('modal-msg').textContent =
+    MESSAGES[idx];
+
+  document.getElementById('overlay').classList.add('show');
+}
+
+window.pilihMoodBaik = pilihMoodBaik;
+window.pilihMoodTidak = pilihMoodTidak;
+window.lanjutKePesan = lanjutKePesan;
+const music = document.getElementById("bgMusic");
+
+// Mainkan musik saat klik pertama
+document.addEventListener("click", () => {
+  music.play();
+}, { once: true });
+
+// Ambil posisi terakhir lagu
+const savedTime = localStorage.getItem("musicTime");
+
+music.addEventListener("loadedmetadata", () => {
+  if (savedTime) {
+    music.currentTime = parseFloat(savedTime);
+  }
+});
+
+// Simpan posisi lagu tiap 1 detik
+setInterval(() => {
+  if (!music.paused) {
+    localStorage.setItem("musicTime", music.currentTime);
+  }
+}, 1000);
+
+ function openGift(){
+  document.getElementById("giftOverlay").classList.add("show");
+}
+
+function closeGift(){
+  document.getElementById("giftOverlay").classList.remove("show");
+}
+
+function giftOverlayClick(e){
+  if(e.target === document.getElementById("giftOverlay")){
+    closeGift();
+  }
+}
+
+window.openGift = openGift;
+window.closeGift = closeGift;
+window.giftOverlayClick = giftOverlayClick;
+
+let moodTidakCount = 0;
+let moodPernahTidak = false;
+
+function showMoodPopup(idx) {
+
+  moodTidakCount = 0;
+  moodPernahTidak = false;
+
+  if (!document.getElementById("moodOverlay")) {
+
+    const el = document.createElement("div");
+
+    el.id = "moodOverlay";
+    el.className = "overlay";
+
+    el.onclick = (e) => {
+      if (e.target === el) closeMoodPopup();
+    };
+
+    el.innerHTML = `
+      <div class="modal">
+
+        <div id="mood-step1">
+
+          <p class="modal-label">Hari ke-2</p>
+
+          <div class="modal-heart">🌸</div>
+
+          <div class="modal-line"></div>
+
+          <p class="modal-msg" style="text-align:center;">
+            Sebelum buka pesan...<br>
+            Gimana mood kamu sekarang?
+          </p>
+
+          <div style="display:flex;justify-content:center;gap:12px;">
+
+            <button
+              id="btn-baik"
+              class="modal-close"
+              onclick="pilihMoodBaik(${idx})"
+              style="
+                background:var(--rose);
+                color:white;
+                border-color:var(--rose);
+                transition:all .3s ease;
+              ">
+              Baik 🌤️
+            </button>
+
+            <button
+              class="modal-close"
+              onclick="pilihMoodTidak()">
+              Tidak 🌧️
+            </button>
+
+          </div>
+
+        </div>
+
+        <div id="mood-step2" style="display:none;">
+
+          <p class="modal-label" id="mood-resp-label"></p>
+
+          <div class="modal-heart" id="mood-resp-icon"></div>
+
+          <div class="modal-line"></div>
+
+          <p class="modal-msg"
+             id="mood-resp-msg"
+             style="text-align:center;"></p>
+
+          <button
+            class="modal-close"
+            onclick="lanjutKePesan(${idx})">
+            Buka pesan hari ini 💌
+          </button>
+
+        </div>
+
+      </div>
+    `;
+
+    document.body.appendChild(el);
+  }
+
+ 
+
+  document.getElementById("moodOverlay").classList.add("show");
+}
+ 
 </script>
+
 </body>
 </html>
-
