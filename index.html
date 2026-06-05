@@ -452,9 +452,15 @@
   <a href="#" onclick="openGift(); return false;">🎁 Hadiah Untuk Herul</a>
 </div>
 
- <div class="overlay" id="giftOverlay">
+<div class="overlay" id="giftOverlay" onclick="giftOverlayClick(event)">
 
   <div class="modal" style="max-width:900px;">
+
+   <div style="text-align:left; margin-bottom:15px;">
+  <button class="modal-close" onclick="closeGift()">
+    ← Kembali
+  </button>
+</div>
 
     <div class="modal-deco"></div>
 
@@ -796,8 +802,15 @@ function closeGift(){
   document.getElementById("giftOverlay").classList.remove("show");
 }
 
+function giftOverlayClick(e){
+  if(e.target === document.getElementById("giftOverlay")){
+    closeGift();
+  }
+}
+
 window.openGift = openGift;
 window.closeGift = closeGift;
+window.giftOverlayClick = giftOverlayClick;
  
 </script>
 
