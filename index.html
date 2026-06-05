@@ -706,9 +706,23 @@ function render() {
   }
 }
 
- const music = document.getElementById("bgMusic");
+ (async () => {
 
-// Mainkan saat klik pertama
+  state = await load();
+
+  render();
+
+  updateCountdown();
+
+  setInterval(() => {
+    updateCountdown();
+  }, 1000);
+
+})();
+
+const music = document.getElementById("bgMusic");
+
+// Mainkan musik saat klik pertama
 document.addEventListener("click", () => {
   music.play();
 }, { once: true });
@@ -717,23 +731,16 @@ document.addEventListener("click", () => {
 const savedTime = localStorage.getItem("musicTime");
 
 music.addEventListener("loadedmetadata", () => {
-  if(savedTime){
+  if (savedTime) {
     music.currentTime = parseFloat(savedTime);
   }
 });
 
 // Simpan posisi lagu tiap 1 detik
 setInterval(() => {
-  if(!music.paused){
+  if (!music.paused) {
     localStorage.setItem("musicTime", music.currentTime);
   }
-}, 1000);
-
-})();
-
-// Simpan posisi lagu setiap 1 detik
-setInterval(() => {
-  localStorage.setItem("musicTime", music.currentTime);
 }, 1000);
  
 </script>
