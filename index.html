@@ -353,22 +353,6 @@
 }
 .footer span { color: var(--rose-pale); }
 
-.secret-gift{
-  margin-top: 30px;
-  text-align: center;
-}
-
-.secret-gift a{
-  text-decoration: none;
-  background: var(--rose);
-  color: white;
-  padding: 12px 22px;
-  border-radius: 999px;
-  display: inline-block;
-  font-size: .85rem;
-  transition: .2s;
-}
-
 .gallery{
   display:grid;
   grid-template-columns:repeat(auto-fill,minmax(150px,1fr));
@@ -465,7 +449,7 @@
 </div>
 
 <div class="secret-gift">
-  <a href="#" onclick="openGift()">🎁 Hadiah Untuk Herul</a>
+  <a href="#" onclick="openGift(); return false;">🎁 Hadiah Untuk Herul</a>
 </div>
 
  <div class="overlay" id="giftOverlay">
