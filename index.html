@@ -344,14 +344,36 @@
 
   /* ─── FOOTER ─── */
   .footer {
-    margin-top: 3rem;
-    font-size: .72rem;
-    color: var(--light);
-    letter-spacing: .1em;
-    text-align: center;
-    animation: fadeUp .8s .5s ease both;
-  }
-  .footer span { color: var(--rose-pale); }
+  margin-top: 3rem;
+  font-size: .72rem;
+  color: var(--light);
+  letter-spacing: .1em;
+  text-align: center;
+  animation: fadeUp .8s .5s ease both;
+}
+.footer span { color: var(--rose-pale); }
+
+.secret-gift{
+  margin-top: 30px;
+  text-align: center;
+}
+
+.secret-gift a{
+  text-decoration: none;
+  background: var(--rose);
+  color: white;
+  padding: 12px 22px;
+  border-radius: 999px;
+  display: inline-block;
+  font-size: .85rem;
+  transition: .2s;
+}
+
+.secret-gift a:hover{
+  transform: translateY(-2px);
+  background: var(--rose-mid);
+}
+
 </style>
 </head>
 <body>
@@ -413,6 +435,10 @@
     <p class="modal-msg" id="modal-msg"></p>
     <button class="modal-close" id="btnClose">Tutup</button>
   </div>
+</div>
+
+<div class="secret-gift">
+  <a href="hadiah.html">💌 Kalau penasaran, klik ini</a>
 </div>
 
 <p class="footer">dibuat dengan <span>♥</span> khusus untukmu Herul Muhammad</p>
