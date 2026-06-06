@@ -665,6 +665,12 @@ function showModal(i) {
     return;
   }
 
+  // Hari ke-3
+  if (i === 2) {
+    showChoosePopup(i);
+    return;
+  }
+
   document.getElementById('modal-label').textContent = `Hari ke-${i + 1}`;
   document.getElementById('modal-msg').textContent = MESSAGES[i];
   document.getElementById('overlay').classList.add('show');
@@ -1003,6 +1009,119 @@ function showMoodPopup(idx) {
  
 
   document.getElementById("moodOverlay").classList.add("show");
+}
+
+ function closeChoosePopup(){
+  document.getElementById("chooseOverlay").classList.remove("show");
+}
+
+function pilihAku(idx){
+
+  closeChoosePopup();
+
+  document.getElementById('modal-label').textContent =
+    `Hari ke-${idx + 1}`;
+
+  document.getElementById('modal-msg').textContent =
+    MESSAGES[idx];
+
+  document.getElementById('overlay').classList.add('show');
+}
+
+function pilihDia(){
+
+  // sengaja tidak melakukan apa-apa 😆
+}
+
+window.pilihAku = pilihAku;
+window.pilihHerul = pilihDia;
+
+function showChoosePopup(idx){
+
+  if(!document.getElementById("chooseOverlay")){
+
+    const el = document.createElement("div");
+
+    el.id = "chooseOverlay";
+    el.className = "overlay";
+
+    el.innerHTML = `
+      <div class="modal">
+
+        <p class="modal-label">Hari ke-3</p>
+
+        <div class="modal-heart">🤔</div>
+
+        <div class="modal-line"></div>
+
+        <p class="modal-msg" style="text-align:center;">
+          Pilih yang mana?
+        </p>
+
+        <div style="
+          display:flex;
+          justify-content:center;
+          gap:20px;
+          margin-top:20px;
+          flex-wrap:wrap;
+        ">
+
+          <div
+            onclick="pilihDia)"
+            style="cursor:pointer;text-align:center;"
+          >
+            <img
+              src="s.jpg"
+              style="
+                width:140px;
+                border-radius:15px;
+              ">
+            <p style="margin-top:8px;">
+              Herul
+            </p>
+          </div>
+
+          <div
+            onclick="pilihAku(${idx})"
+            style="cursor:pointer;text-align:center;"
+          >
+            <img
+              src="d.jpg"
+              style="
+                width:140px;
+                border-radius:15px;
+              ">
+            <p style="margin-top:8px;">
+              Aku
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    `;
+
+    document.body.appendChild(el);
+  }
+
+  document.getElementById("chooseOverlay").classList.add("show");
+
+  // setelah 5 detik pilihan Dia hilang
+  setTimeout(() => {
+
+    const cards = document.querySelectorAll("#chooseOverlay > .modal div[onclick]");
+
+    if(cards.length >= 2){
+      cards[0].style.transition = "all .5s ease";
+      cards[0].style.opacity = "0";
+      cards[0].style.transform = "scale(.5)";
+
+      setTimeout(() => {
+        cards[0].remove();
+      }, 500);
+    }
+
+  }, 5000);
 }
  
 </script>
