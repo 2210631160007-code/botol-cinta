@@ -515,9 +515,7 @@
  
 <p class="footer">dibuat dengan <span>♥</span> khusus untukmu Herul Muhammad</p>
 
- <audio id="bgMusic" loop>
-  <source src="1atau2.mp3" type="audio/mpeg">
-</audio>
+<audio id="bgMusic" loop></audio>
  
 <script type="module">
  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
@@ -658,6 +656,19 @@ async function openCell(i) {
 }
 
 function showModal(i) {
+
+ const music = document.getElementById("bgMusic");
+
+const DAY_MUSIC = [
+  "lagu.mp3",      // Day 1
+  "Eclipse.mp3",   // Day 2
+  "1atau2.mp3"     // Day 3
+];
+
+if (DAY_MUSIC[i]) {
+  music.src = DAY_MUSIC[i];
+  music.play();
+}
 
   // Hari ke-2
   if (i === 1) {
