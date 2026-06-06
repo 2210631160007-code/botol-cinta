@@ -526,10 +526,7 @@ import {
   getFirestore,
   doc,
   getDoc,
-  setDoc,
-  addDoc,
-  collection,
-  serverTimestamp
+  setDoc
 } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -620,13 +617,7 @@ async function load() {
   };
 }
 
-async function trackVisit(i) {
-  await addDoc(collection(db, "visit_log"), {
-    hari: i,
-    waktu: serverTimestamp(),
-    device: navigator.userAgent
-  });
-}
+async function save(s) {
 
   const ref = doc(db, "botol_cinta", "ayang");
 
@@ -651,8 +642,7 @@ function nextIdx() {
 function canOpen() { return state.lastDate !== today(); }
 
 async function openCell(i) {
-  await trackVisit(i); 
- if (i !== nextIdx()) return;
+  if (i !== nextIdx()) return;
   if (!canOpen()) {
     const n = document.getElementById('notice');
     n.style.display = 'block';
