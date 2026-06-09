@@ -882,13 +882,45 @@ function lanjutKePesan(idx) {
 
   closeMoodPopup();
 
-  document.getElementById('modal-label').textContent =
-    `Hari ke-${idx + 1}`;
+document.getElementById('modal-label').textContent =
+  `Hari ke-${i + 1}`;
 
-  document.getElementById('modal-msg').textContent =
-    MESSAGES[idx];
+document.getElementById('modal-msg').textContent =
+  MESSAGES[i];
 
-  document.getElementById('overlay').classList.add('show');
+// hapus tombol lama
+const oldBtn = document.getElementById("videoBtn");
+if(oldBtn) oldBtn.remove();
+
+// khusus Day 5
+if(i === 4){
+
+  const btn = document.createElement("button");
+
+  btn.id = "videoBtn";
+  btn.className = "modal-close";
+
+  btn.innerHTML = "🎥 Tonton Video";
+
+  btn.style.marginTop = "15px";
+  btn.style.marginBottom = "15px";
+
+  btn.onclick = () => {
+
+    window.open("video.mp4", "_blank");
+
+  };
+
+  const closeBtn =
+    document.getElementById("btnClose");
+
+  closeBtn.parentNode.insertBefore(
+    btn,
+    closeBtn
+  );
+}
+
+document.getElementById('overlay').classList.add('show');
 }
 
 window.pilihMoodBaik = pilihMoodBaik;
